@@ -31,7 +31,7 @@
         </materialDesign:ColorZone>
         <Grid x:Name="Main_Grid">
 
-            <Button Content="Add Rental Address and Renters" HorizontalAlignment="Left" Margin="497,365,0,0" VerticalAlignment="Top" Width="241" Click="Button_Click"/>
+            <Button Content="Add Rental Address and Renters" HorizontalAlignment="Left" Margin="532,362,0,0" VerticalAlignment="Top" Width="241"  Style="{StaticResource MaterialDesignRaisedDarkButton}" Click="Button_Click"/>
             <ListView x:Name="listView" HorizontalAlignment="Left" Height="280" Margin="21,61,0,0" VerticalAlignment="Top" Width="752" MouseDoubleClick="ListView_MouseDoubleClick">
                 <ListView.View>
                     <GridView>
