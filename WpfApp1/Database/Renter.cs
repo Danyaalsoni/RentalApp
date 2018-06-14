@@ -27,21 +27,34 @@ namespace WpfApp1
         public string Renewal_in_30 { get; set; }
         public string Renewal_in_90 { get; set; }
 
-        public Renter(int ID,string name,string phone,string email,double rent,DateTime start,DateTime end,double deposit,double cleaningDeposit,double keyDeposit,string ren30,string ren90)
+        public Renter(string name,string phone,string email,double rent,string start,string end,double deposit,double cleaningDeposit,double keyDeposit,string ren30,string ren90)
+        {
+            //this.ID = ID;
+            this.TenantName = name;
+            this.Phone = phone;
+            this.Email = email;
+            this.Rent = rent;
+            this.StartDate = start;
+            this.EndDate = end;
+            this.deposit = deposit;
+            this.cleaningDeposit = cleaningDeposit;
+            this.keyDeposit = keyDeposit;
+
+        }
+
+        public Renter(int ID,string name, string phone, string email, double rent, string start, string end, double deposit, double cleaningDeposit, double keyDeposit, string ren30, string ren90)
         {
             this.ID = ID;
             this.TenantName = name;
             this.Phone = phone;
             this.Email = email;
             this.Rent = rent;
-            this.StartDate = start.ToString();
-            this.EndDate = end.ToString();
+            this.StartDate = start;
+            this.EndDate = end;
             this.deposit = deposit;
             this.cleaningDeposit = cleaningDeposit;
             this.keyDeposit = keyDeposit;
 
         }
-      
-
     }
 }

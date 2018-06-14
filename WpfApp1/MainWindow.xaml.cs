@@ -34,8 +34,12 @@ namespace WpfApp1
             InitializeComponent();
             
                 
-                List<RentalAddress> rentalAddressesList = new List<RentalAddress>();
-                using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=C:\Users\danya\source\repos\WpfApp1\WpfApp1\DataFile\RentalDatabase.db;"))
+            List<RentalAddress> rentalAddressesList = new List<RentalAddress>();
+            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string path = (System.IO.Path.GetDirectoryName(executable));
+            AppDomain.CurrentDomain.SetData("DataDirectory", path);
+            
+            using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=|DataDirectory|\DataFile\RentalDatabase.db"))
                 {
                     conn.Open();
                    // SQLiteCommand command = new SQLiteCommand("INSERT into RentalAddress (ID,Address,RenterID) Values (4,'ss',0)", conn);
@@ -46,13 +50,13 @@ namespace WpfApp1
                     while (reader.Read())
                     {
                         //Console.WriteLine(reader["YourColumn"]);
-                        rentalAddressesList.Add(new RentalAddress(Convert.ToInt32(reader["ID"].ToString()), reader["Address"].ToString(), Convert.ToInt32(reader["RenterID"].ToString())));
+                        rentalAddressesList.Add(new RentalAddress(Convert.ToInt32(reader["ID"]),reader["Address"].ToString()));
                       
                     }
                     reader.Close();
                     foreach(RentalAddress r in rentalAddressesList)
                     {
-                    this.listView.Items.Add(r);
+                        this.listView.Items.Add(r);
                     }
                 }
 

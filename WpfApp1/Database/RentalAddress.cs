@@ -17,11 +17,14 @@ namespace WpfApp1.Database
         public string address { get; set; }
         public int renterID { get; set; }
         public int renters { get; set; }
-        public RentalAddress (int ID,string address,int renterID){
+        public RentalAddress (int ID,string address){
             this.ID = ID;
             this.address = address;
             this.renterID = renterID;
-            using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=C:\Users\danya\source\repos\WpfApp1\WpfApp1\DataFile\RentalDatabase.db;"))
+            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string path = (System.IO.Path.GetDirectoryName(executable));
+            AppDomain.CurrentDomain.SetData("DataDirectory", path);
+            using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=|DataDirectory|\DataFile\RentalDatabase.db"))
             {
                 conn.Open();
                 this.renters = 0;
