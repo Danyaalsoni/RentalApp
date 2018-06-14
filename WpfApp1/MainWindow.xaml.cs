@@ -32,35 +32,39 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
+
+            loadItems(); 
             
-                
+
+            
+        }
+        public void loadItems()
+        {
             List<RentalAddress> rentalAddressesList = new List<RentalAddress>();
             string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
             string path = (System.IO.Path.GetDirectoryName(executable));
             AppDomain.CurrentDomain.SetData("DataDirectory", path);
-            
-            using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=|DataDirectory|\DataFile\RentalDatabase.db"))
-                {
-                    conn.Open();
-                   // SQLiteCommand command = new SQLiteCommand("INSERT into RentalAddress (ID,Address,RenterID) Values (4,'ss',0)", conn);
-                    //command.ExecuteNonQuery();
-                    SQLiteCommand command1 = new SQLiteCommand("Select * from RentalAddress", conn);
-                    SQLiteDataReader reader = command1.ExecuteReader();
-                    
-                    while (reader.Read())
-                    {
-                        //Console.WriteLine(reader["YourColumn"]);
-                        rentalAddressesList.Add(new RentalAddress(Convert.ToInt32(reader["ID"]),reader["Address"].ToString()));
-                      
-                    }
-                    reader.Close();
-                    foreach(RentalAddress r in rentalAddressesList)
-                    {
-                        this.listView.Items.Add(r);
-                    }
-                }
 
-            
+            using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=|DataDirectory|\DataFile\RentalDatabase.db"))
+            {
+                conn.Open();
+                // SQLiteCommand command = new SQLiteCommand("INSERT into RentalAddress (ID,Address,RenterID) Values (4,'ss',0)", conn);
+                //command.ExecuteNonQuery();
+                SQLiteCommand command1 = new SQLiteCommand("Select * from RentalAddress", conn);
+                SQLiteDataReader reader = command1.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    //Console.WriteLine(reader["YourColumn"]);
+                    rentalAddressesList.Add(new RentalAddress(Convert.ToInt32(reader["ID"]), reader["Address"].ToString()));
+
+                }
+                reader.Close();
+                foreach (RentalAddress r in rentalAddressesList)
+                {
+                    this.listView.Items.Add(r);
+                }
+            }
         }
         public void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -75,6 +79,7 @@ namespace WpfApp1
         {
             AddRentalAddress newWindow = new AddRentalAddress();
             newWindow.ShowDialog();
+            loadItems();
            
         }
     }

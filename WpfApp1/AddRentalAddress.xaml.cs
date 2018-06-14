@@ -69,24 +69,27 @@ namespace WpfApp1
                         conn.Open();
                         foreach (Renter renter in renterList)
                         {
-                            SQLiteCommand command1 = new SQLiteCommand("INSERT INTO Renter (TenantName,Phone,Email,Rent,StartDate,EndDate,Deposit,CleaningDeposit,KeyDeposit,Renewal_in_30,Renewal_in_90,AddressID) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)", conn);
-                            command1.Parameters.Add(renter.TenantName);
-                            command1.Parameters.Add(renter.Phone);
-                            command1.Parameters.Add(renter.Email);
-                            command1.Parameters.Add(renter.Rent);
-                            command1.Parameters.Add(renter.StartDate);
-                            command1.Parameters.Add(renter.EndDate);
-                            command1.Parameters.Add(renter.deposit);
-                            command1.Parameters.Add(renter.cleaningDeposit);
-                            command1.Parameters.Add(renter.keyDeposit);
-                            command1.Parameters.Add(renter.Renewal_in_30);
-                            command1.Parameters.Add(renter.Renewal_in_90);
-                            command1.Parameters.Add(count);
+                            SQLiteCommand command1 = new SQLiteCommand("INSERT INTO Renter (TenantName,Phone,Email,Rent,StartDate,EndDate,Deposit,CleaningDeposit,KeyDeposit,Renewal_in_30,Renewal_in_90,AddressID) VALUES(@param1,@param2,@param3,@param4,@param5,@param6,@param7,@param8,@param9,@param10,@param11,@param12)", conn);
+                            command1.Parameters.Add(new SQLiteParameter( "@param1",renter.TenantName));
+                            command1.Parameters.Add(new SQLiteParameter("@param2", renter.Phone));
+                            command1.Parameters.Add(new SQLiteParameter("@param3", renter.Email));
+                            command1.Parameters.Add(new SQLiteParameter("@param4", renter.Rent));
+                            command1.Parameters.Add(new SQLiteParameter("@param5", renter.StartDate));
+                            command1.Parameters.Add(new SQLiteParameter("@param6", renter.EndDate));
+                            command1.Parameters.Add(new SQLiteParameter("@param7", renter.deposit));
+                            command1.Parameters.Add(new SQLiteParameter("@param8", renter.cleaningDeposit));
+                            command1.Parameters.Add(new SQLiteParameter("@param9", renter.keyDeposit));
+                            command1.Parameters.Add(new SQLiteParameter("@param10", renter.Renewal_in_30));
+                            command1.Parameters.Add(new SQLiteParameter("@param11", renter.Renewal_in_90));
+                            command1.Parameters.Add(new SQLiteParameter("@param12", count));
                             command1.ExecuteNonQuery();
                         }
-                        SQLiteCommand command2 = new SQLiteCommand("INSERT INTO RentalAddress (Address) VALUES (?)",conn);
-                        command2.Parameters.Add(address);
-                        command2.ExecuteNonQuery();
+                        if (checkAddress(address))
+                        {
+                            SQLiteCommand command2 = new SQLiteCommand("INSERT INTO RentalAddress (Address) VALUES (@param1)", conn);
+                            command2.Parameters.Add(new SQLiteParameter("@param1", address));
+                            command2.ExecuteNonQuery();
+                        }
                     }
                 }
                 else
@@ -95,8 +98,12 @@ namespace WpfApp1
                     using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=|DataDirectory|\DataFile\RentalDatabase.db"))
                     {
                         conn.Open();
-                        SQLiteCommand command3 = new SQLiteCommand("INSERT INTO RentalAddress (Address) VALUES (" + "'" + address + "'" + ")",conn);
-                        command3.ExecuteNonQuery();
+                        if (checkAddress(address))
+                        {
+                            SQLiteCommand command3 = new SQLiteCommand("INSERT INTO RentalAddress (Address) VALUES (@param1)", conn);
+                            command3.Parameters.Add(new SQLiteParameter("@param1", address));
+                            command3.ExecuteNonQuery();
+                        }
                     }
                 }
                 this.Close();
@@ -106,7 +113,32 @@ namespace WpfApp1
                 MessageBox.Show("Error in SQL statement" + ex.ToString());
             }
         }
+        public bool checkAddress(string addr)
+        {
+            int count = 0;
+            using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=|DataDirectory|\DataFile\RentalDatabase.db"))
+            {
+                conn.Open();
+             
+                SQLiteCommand command = new SQLiteCommand("SELECT * from RentalAddress WHERE Address="+"'"+addr+"'"+")", conn);
+                SQLiteDataReader reader1 = command.ExecuteReader();
 
+                while (reader1.Read())
+                {
+                    count++;
+                }
+
+
+            }
+            if (count == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         private void Cancel_Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
