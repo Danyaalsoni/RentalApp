@@ -119,15 +119,19 @@ namespace WpfApp1
             using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=|DataDirectory|\DataFile\RentalDatabase.db"))
             {
                 conn.Open();
-             
-                SQLiteCommand command = new SQLiteCommand("SELECT * from RentalAddress WHERE Address="+"'"+addr+"'"+")", conn);
-                SQLiteDataReader reader1 = command.ExecuteReader();
-
-                while (reader1.Read())
+                try
                 {
-                    count++;
-                }
+                    SQLiteCommand command = new SQLiteCommand("SELECT * from RentalAddress WHERE Address=" + "'" + addr + "'" + ")", conn);
+                    SQLiteDataReader reader1 = command.ExecuteReader();
 
+                    while (reader1.Read())
+                    {
+                        count++;
+                    }
+                }catch(Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
 
             }
             if (count == 0)
