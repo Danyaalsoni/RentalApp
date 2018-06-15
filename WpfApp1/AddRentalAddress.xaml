@@ -9,10 +9,17 @@
         mc:Ignorable="d"
         Title="AddRentalAddress" Height="600" Width="800">
     <Grid>
-        <Button Content="Save Address" HorizontalAlignment="Left" Margin="624,515,0,0" VerticalAlignment="Top" Width="139" Click="Save_Button_Click"  Style="{StaticResource MaterialDesignRaisedDarkButton}"/>
-        <Button Content="Cancel" HorizontalAlignment="Left" Margin="468,515,0,0" VerticalAlignment="Top" Width="139" Click="Cancel_Button_Click" Style="{StaticResource MaterialDesignRaisedLightButton}" />
-        <TextBox x:Name="addstreetAddressBox" HorizontalAlignment="Left" Height="46" Margin="126,51,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="481" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Enter Street Address"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,78,0,0" TextWrapping="Wrap" Text="Street Address: " VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="0.588,1.271"/>
+        <materialDesign:ColorZone
+            Mode="PrimaryDark"
+            Padding="16">
+
+            <StackPanel>
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Margin="16 0 0 0"><Run Text="Add Rental Address:"/></TextBlock>
+            </StackPanel>
+
+        </materialDesign:ColorZone>
         <ListView x:Name="renterListView"   HorizontalAlignment="Left" Height="333" Margin="535,130,0,0" VerticalAlignment="Top" Width="228">
             <ListView.View>
                 <GridView>
@@ -21,6 +28,12 @@
             </ListView.View>
         </ListView>
         <Separator HorizontalAlignment="Left" Height="44" Margin="0,102,0,0" VerticalAlignment="Top" Width="782" RenderTransformOrigin="0.335,0.275"/>
+
+        <Button Content="Save Address" HorizontalAlignment="Left" Margin="624,515,0,0" VerticalAlignment="Top" Width="139" Click="Save_Button_Click"  Style="{StaticResource MaterialDesignRaisedDarkButton}"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" Margin="468,515,0,0" VerticalAlignment="Top" Width="139" Click="Cancel_Button_Click" Style="{StaticResource MaterialDesignRaisedLightButton}" />
+        
+        <TextBox x:Name="addstreetAddressBox" HorizontalAlignment="Left" Height="46" Margin="126,51,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="481" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Enter Street Address"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,78,0,0" TextWrapping="Wrap" Text="Street Address: " VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="0.588,1.271"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,133,0,0" TextWrapping="Wrap" Text="Add Renters:" VerticalAlignment="Top" RenderTransformOrigin="0.109,-0.712" Height="27" Width="131" FontSize="16"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,165,0,0" TextWrapping="Wrap" Text="Tenant Name: " VerticalAlignment="Top" Height="28" Width="96" FontSize="14"/>
         <TextBox x:Name="addNameBox"  HorizontalAlignment="Left" Height="44" Margin="111,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="122" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Enter Name"/>
