@@ -121,7 +121,7 @@ namespace WpfApp1
                 conn.Open();
                 try
                 {
-                    SQLiteCommand command = new SQLiteCommand("SELECT * from RentalAddress WHERE Address=" + "'" + addr + "'" + ")", conn);
+                    SQLiteCommand command = new SQLiteCommand("SELECT * from RentalAddress WHERE Address=" + "'" + addr + "'", conn);
                     SQLiteDataReader reader1 = command.ExecuteReader();
 
                     while (reader1.Read())
