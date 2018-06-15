@@ -9,6 +9,7 @@
         mc:Ignorable="d"
         Title="AddRentalAddress" Height="600" Width="800">
     <Grid>
+
         <materialDesign:ColorZone
             Mode="PrimaryDark"
             Padding="16">
@@ -20,7 +21,7 @@
             </StackPanel>
 
         </materialDesign:ColorZone>
-        <ListView x:Name="renterListView"   HorizontalAlignment="Left" Height="333" Margin="535,130,0,0" VerticalAlignment="Top" Width="228">
+        <ListView x:Name="renterListView"   HorizontalAlignment="Left" Height="333" Margin="587,130,0,0" VerticalAlignment="Top" Width="195">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Renters" DisplayMemberBinding="{Binding TenantName}"/>
@@ -31,7 +32,7 @@
 
         <Button Content="Save Address" HorizontalAlignment="Left" Margin="624,515,0,0" VerticalAlignment="Top" Width="139" Click="Save_Button_Click"  Style="{StaticResource MaterialDesignRaisedDarkButton}"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="468,515,0,0" VerticalAlignment="Top" Width="139" Click="Cancel_Button_Click" Style="{StaticResource MaterialDesignRaisedLightButton}" />
-        
+
         <TextBox x:Name="addstreetAddressBox" HorizontalAlignment="Left" Height="46" Margin="126,51,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="481" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Enter Street Address"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,78,0,0" TextWrapping="Wrap" Text="Street Address: " VerticalAlignment="Top" FontSize="14" RenderTransformOrigin="0.588,1.271"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,133,0,0" TextWrapping="Wrap" Text="Add Renters:" VerticalAlignment="Top" RenderTransformOrigin="0.109,-0.712" Height="27" Width="131" FontSize="16"/>
@@ -48,24 +49,21 @@
         <DatePicker x:Name="addEndDateBox" HorizontalAlignment="Left" Margin="113,394,0,0" VerticalAlignment="Top" RenderTransformOrigin="9.396,-0.002" Width="120" materialDesign:HintAssist.Hint="Enter End Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="32"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,396,0,0" TextWrapping="Wrap" Text="End Date:" VerticalAlignment="Top" RenderTransformOrigin="-2.404,-0.69" Height="21" FontSize="14"/>
         <TextBlock HorizontalAlignment="Left" Margin="256,165,0,0" TextWrapping="Wrap" Text="Deposit: " VerticalAlignment="Top" Height="28" Width="96" FontSize="14"/>
-        <TextBox x:Name="addDepositBox" HorizontalAlignment="Left" Height="44" Margin="326,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="122" PreviewTextInput="NumberValidationTextBox" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Enter Deposit"/>
+        <TextBox x:Name="addDepositBox" HorizontalAlignment="Left" Height="44" Margin="326,144,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="103" PreviewTextInput="NumberValidationTextBox" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Enter Deposit"/>
         <TextBlock HorizontalAlignment="Left" Margin="256,216,0,0" TextWrapping="Wrap" Text="Cleaning Deposit: " VerticalAlignment="Top" Height="38" Width="96" FontSize="14"/>
-        <TextBox x:Name="addCleaningDepositBox" HorizontalAlignment="Left" Height="44" Margin="326,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="122" PreviewTextInput="NumberValidationTextBox" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Enter Cleaning Deposit"/>
+        <TextBox x:Name="addCleaningDepositBox" HorizontalAlignment="Left" Height="44" Margin="326,210,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="103" PreviewTextInput="NumberValidationTextBox" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Enter Cleaning Deposit"/>
         <TextBlock HorizontalAlignment="Left" Margin="256,264,0,0" TextWrapping="Wrap" Text="Key Deposit: " VerticalAlignment="Top" Height="38" Width="65" FontSize="14"/>
-        <TextBox x:Name="addKeyDepositBox" HorizontalAlignment="Left" Height="44" Margin="326,259,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="122" PreviewTextInput="NumberValidationTextBox" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Enter Key Deposit"/>
+        <TextBox x:Name="addKeyDepositBox" HorizontalAlignment="Left" Height="44" Margin="326,259,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="103" PreviewTextInput="NumberValidationTextBox" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Enter Key Deposit"/>
         <TextBlock HorizontalAlignment="Left" Margin="256,331,0,0" TextWrapping="Wrap" Text="Renewal:" VerticalAlignment="Top" RenderTransformOrigin="-2.404,-0.69" Height="21" FontSize="14"/>
-        <ComboBox x:Name="addRenewalCombo" HorizontalAlignment="Left" Margin="328,324,0,0" VerticalAlignment="Top" Width="120" materialDesign:HintAssist.Hint="Renewal Date">
-            <ComboBoxItem>
-                Renewal in 30
-            </ComboBoxItem>
-            <ComboBoxItem>
-                Renewal in 90
-            </ComboBoxItem>
-            <ComboBoxItem>
-                No Renewal
-            </ComboBoxItem>
+        <ComboBox x:Name="addRenewalCombo" HorizontalAlignment="Left" Margin="328,324,0,0" VerticalAlignment="Top" Width="101" materialDesign:HintAssist.Hint="Renewal Date">
+            <ComboBoxItem Content="Renewal in 30"/>
+            <ComboBoxItem Content="Renewal in 90"/>
+            <ComboBoxItem Content="No Renewal"/>
         </ComboBox>
-        <Button Content="Add Renter" HorizontalAlignment="Left" Margin="328,394,0,0" VerticalAlignment="Top" Width="120" Click="Add_Renter_Button_Click"/>
+        <Button Content="Add Renter" HorizontalAlignment="Left" Margin="462,394,0,0" VerticalAlignment="Top" Width="120" Click="Add_Renter_Button_Click"/>
+        <DatePicker x:Name="addCleaningDateBox" HorizontalAlignment="Left" Margin="434,229,0,0" VerticalAlignment="Top" RenderTransformOrigin="9.396,-0.002" Width="148" materialDesign:HintAssist.Hint="Cleaning Deposit Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="25"/>
+        <DatePicker x:Name="addKeyDateBox" HorizontalAlignment="Left" Margin="434,278,0,0" VerticalAlignment="Top" RenderTransformOrigin="9.396,-0.002" Width="148" materialDesign:HintAssist.Hint="Key Deposit Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="25"/>
+        <DatePicker x:Name="addDepositDateBox" HorizontalAlignment="Left" Margin="434,163,0,0" VerticalAlignment="Top" RenderTransformOrigin="9.396,-0.002" Width="148" materialDesign:HintAssist.Hint="Deposit Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="25"/>
 
     </Grid>
 </Window>

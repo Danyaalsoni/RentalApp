@@ -26,8 +26,11 @@ namespace WpfApp1
         public int AddressID { get; set; }
         public string Renewal_in_30 { get; set; }
         public string Renewal_in_90 { get; set; }
+        public string cleaningDepositDate { get; set; }
+        public string keyDepositDate { get; set; }
+        public string depositDate { get; set; }
 
-        public Renter(string name,string phone,string email,double rent,string start,string end,double deposit,double cleaningDeposit,double keyDeposit,string ren30,string ren90)
+        public Renter(string name,string phone,string email,double rent,string start,string end,double deposit,double cleaningDeposit,double keyDeposit,string ren30,string ren90,string depositDate,string keyDepositDate,string cleaningDepositDate)
         {
             //this.ID = ID;
             this.TenantName = name;
@@ -39,10 +42,13 @@ namespace WpfApp1
             this.deposit = deposit;
             this.cleaningDeposit = cleaningDeposit;
             this.keyDeposit = keyDeposit;
+            this.cleaningDepositDate = cleaningDepositDate;
+            this.depositDate = depositDate;
+            this.keyDepositDate = keyDepositDate;
 
         }
 
-        public Renter(int ID,string name, string phone, string email, double rent, string start, string end, double deposit, double cleaningDeposit, double keyDeposit, string ren30, string ren90)
+        public Renter(int ID,string name, string phone, string email, double rent, string start, string end, double deposit, double cleaningDeposit, double keyDeposit, string ren30, string ren90, string depositDate, string keyDepositDate, string cleaningDepositDate)
         {
             this.ID = ID;
             this.TenantName = name;
@@ -54,7 +60,9 @@ namespace WpfApp1
             this.deposit = deposit;
             this.cleaningDeposit = cleaningDeposit;
             this.keyDeposit = keyDeposit;
-
+            this.cleaningDepositDate = cleaningDepositDate;
+            this.depositDate = depositDate;
+            this.keyDepositDate = keyDepositDate;
         }
     }
 }

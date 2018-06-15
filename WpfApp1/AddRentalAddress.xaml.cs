@@ -22,18 +22,25 @@ namespace WpfApp1
     public partial class AddRentalAddress : Window
     {
         List<Renter> renterList = new List<Renter>();
+        string dbloc;
         public AddRentalAddress()
         {
             InitializeComponent();
+            dbloc = ((MainWindow)Application.Current.MainWindow).dbloc;
+
         }
 
         private void Save_Button_Click(object sender, RoutedEventArgs e)
         {
             string address = addstreetAddressBox.Text;
             int count = 0;
-            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            string path = (System.IO.Path.GetDirectoryName(executable));
-            AppDomain.CurrentDomain.SetData("DataDirectory", path);
+            if (dbloc == "")
+            {
+                string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                string path = (System.IO.Path.GetDirectoryName(executable));
+                AppDomain.CurrentDomain.SetData("DataDirectory", path);
+                dbloc = @"Data Source=|DataDirectory|\DataFile\RentalDatabase.db";
+            }
             if (address == "")
             {
                 MessageBox.Show("Please Enter Street Address");
@@ -41,7 +48,7 @@ namespace WpfApp1
             }
             try
             {
-                using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=|DataDirectory|\DataFile\RentalDatabase.db"))
+                using (SQLiteConnection conn = new SQLiteConnection(dbloc))
                 {
                     
                     conn.Open();
@@ -64,12 +71,12 @@ namespace WpfApp1
                 if (renterList.Count != 0)
                 {
                     
-                    using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=|DataDirectory|\DataFile\RentalDatabase.db"))
+                    using (SQLiteConnection conn = new SQLiteConnection(dbloc))
                     {
                         conn.Open();
                         foreach (Renter renter in renterList)
                         {
-                            SQLiteCommand command1 = new SQLiteCommand("INSERT INTO Renter (TenantName,Phone,Email,Rent,StartDate,EndDate,Deposit,CleaningDeposit,KeyDeposit,Renewal_in_30,Renewal_in_90,AddressID) VALUES(@param1,@param2,@param3,@param4,@param5,@param6,@param7,@param8,@param9,@param10,@param11,@param12)", conn);
+                            SQLiteCommand command1 = new SQLiteCommand("INSERT INTO Renter (TenantName,Phone,Email,Rent,StartDate,EndDate,Deposit,CleaningDeposit,KeyDeposit,Renewal_in_30,Renewal_in_90,AddressID,CleaningDepositDate,KeyDepositDate,DepositDate) VALUES(@param1,@param2,@param3,@param4,@param5,@param6,@param7,@param8,@param9,@param10,@param11,@param12,@param13,@param14,@param15)", conn);
                             command1.Parameters.Add(new SQLiteParameter( "@param1",renter.TenantName));
                             command1.Parameters.Add(new SQLiteParameter("@param2", renter.Phone));
                             command1.Parameters.Add(new SQLiteParameter("@param3", renter.Email));
@@ -82,6 +89,9 @@ namespace WpfApp1
                             command1.Parameters.Add(new SQLiteParameter("@param10", renter.Renewal_in_30));
                             command1.Parameters.Add(new SQLiteParameter("@param11", renter.Renewal_in_90));
                             command1.Parameters.Add(new SQLiteParameter("@param12", count));
+                            command1.Parameters.Add(new SQLiteParameter("@param13", renter.cleaningDepositDate));
+                            command1.Parameters.Add(new SQLiteParameter("@param14", renter.keyDepositDate));
+                            command1.Parameters.Add(new SQLiteParameter("@param15", renter.depositDate));
                             command1.ExecuteNonQuery();
                         }
                         if (checkAddress(address))
@@ -95,7 +105,7 @@ namespace WpfApp1
                 else
                 {
                    
-                    using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=|DataDirectory|\DataFile\RentalDatabase.db"))
+                    using (SQLiteConnection conn = new SQLiteConnection(dbloc))
                     {
                         conn.Open();
                         if (checkAddress(address))
@@ -116,7 +126,7 @@ namespace WpfApp1
         public bool checkAddress(string addr)
         {
             int count = 0;
-            using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=|DataDirectory|\DataFile\RentalDatabase.db"))
+            using (SQLiteConnection conn = new SQLiteConnection(dbloc))
             {
                 conn.Open();
                 try
@@ -150,7 +160,7 @@ namespace WpfApp1
 
         private void Add_Renter_Button_Click(object sender, RoutedEventArgs e)
         {
-            string tenantName, phoneNumber, emailAddress, renewal,renewalin30="NO",renewalin90="NO";
+            string tenantName, phoneNumber, emailAddress, renewal,renewalin30="NO",renewalin90="NO",depositDate="",cleaningDepositDate="",keyDepositDate="";
             int rent=0, deposit=0, cleaningDeposit=0, keyDeposit=0;
             string startDate, endDate;
             tenantName = addNameBox.Text;
@@ -159,17 +169,38 @@ namespace WpfApp1
             renewal = addRenewalCombo.Text;
             startDate = addStartDateBox.Text;
             endDate = addEndDateBox.Text;
+            depositDate = addDepositDateBox.Text;
+            cleaningDepositDate = addCleaningDateBox.Text;
+            keyDepositDate = addKeyDateBox.Text;
+
             bool flag = true,tenantExists=false;
             Renter renter;
-            
-            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            string path = (System.IO.Path.GetDirectoryName(executable));
-            AppDomain.CurrentDomain.SetData("DataDirectory", path);
-
+            if (dbloc == "")
+            {
+                string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                string path = (System.IO.Path.GetDirectoryName(executable));
+                AppDomain.CurrentDomain.SetData("DataDirectory", path);
+                dbloc = @"Data Source=|DataDirectory|\DataFile\RentalDatabase.db";
+            }
             if (tenantName == "")
             {
                 flag = false;
                 MessageBox.Show("Please enter Tenant Name");
+            }
+            else if (cleaningDepositDate == "")
+            {
+                flag = false;
+                MessageBox.Show("Please enter Cleaning Deposit Date");
+            }
+            else if (keyDepositDate == "")
+            {
+                flag = false;
+                MessageBox.Show("Please enter Key Deposit Date");
+            }
+            else if (depositDate == "")
+            {
+                flag = false;
+                MessageBox.Show("Please enter Deposit Date");
             }
             else if (renewal == "")
             {
@@ -206,7 +237,7 @@ namespace WpfApp1
                 flag = false;
                 MessageBox.Show("Please enter End Date");
             }
-            else if (tenantName == "" || renewal == "" || addRentBox.Text == "" || addCleaningDepositBox.Text == "" || addKeyDepositBox.Text == "" || startDate == "" || endDate == "" ||phoneNumber==""||emailAddress=="")
+            else if (cleaningDepositDate==""||depositDate==""||keyDepositDate==""|| tenantName == "" || renewal == "" || addRentBox.Text == "" || addCleaningDepositBox.Text == "" || addKeyDepositBox.Text == "" || startDate == "" || endDate == "" ||phoneNumber==""||emailAddress=="")
             {
                 flag = false;
                 MessageBox.Show("Please Enter Missing Values");
@@ -235,7 +266,7 @@ namespace WpfApp1
             {
                 
 
-                using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=|DataDirectory|\DataFile\RentalDatabase.db"))
+                using (SQLiteConnection conn = new SQLiteConnection(dbloc))
                 {
                     conn.Open();
                     SQLiteCommand command1 = new SQLiteCommand("Select * from Renter where TenantName ='" + tenantName+"'", conn);
@@ -258,7 +289,7 @@ namespace WpfApp1
                 }
                 if (!tenantExists)
                 {
-                    renter = new Renter(tenantName, phoneNumber, emailAddress, rent, startDate, endDate, deposit, cleaningDeposit, keyDeposit, renewalin30, renewalin90);
+                    renter = new Renter(tenantName, phoneNumber, emailAddress, rent, startDate, endDate, deposit, cleaningDeposit, keyDeposit, renewalin30, renewalin90,depositDate,keyDepositDate,cleaningDepositDate);
                    
                     renterList.Add(renter);
                     this.renterListView.Items.Add(renter);

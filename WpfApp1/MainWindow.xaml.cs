@@ -29,6 +29,7 @@ namespace WpfApp1
         /// <summary>
         /// 
         /// </summary>
+        public string dbloc="";
         public MainWindow()
         {
             InitializeComponent();
@@ -41,11 +42,16 @@ namespace WpfApp1
         public void loadItems()
         {
             List<RentalAddress> rentalAddressesList = new List<RentalAddress>();
-            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            string path = (System.IO.Path.GetDirectoryName(executable));
-            AppDomain.CurrentDomain.SetData("DataDirectory", path);
-
-            using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=|DataDirectory|\DataFile\RentalDatabase.db"))
+            rentalAddressesList.Clear();
+            this.listView.Items.Clear();
+            if (dbloc == "")
+            {
+                string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                string path = (System.IO.Path.GetDirectoryName(executable));
+                AppDomain.CurrentDomain.SetData("DataDirectory", path);
+                dbloc = @"Data Source=|DataDirectory|\DataFile\RentalDatabase.db";
+            }
+            using (SQLiteConnection conn = new SQLiteConnection(dbloc))
             {
                 conn.Open();
                 // SQLiteCommand command = new SQLiteCommand("INSERT into RentalAddress (ID,Address,RenterID) Values (4,'ss',0)", conn);
@@ -81,6 +87,27 @@ namespace WpfApp1
             newWindow.ShowDialog();
             loadItems();
            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.DefaultExt = ".db";
+            Nullable<bool> res = dlg.ShowDialog();
+            if (res.HasValue && res.Value)
+            {
+                dbloc = dlg.FileName;
+
+                dbloc = @"Data Source=" + dbloc;
+                DatabaseLocationText.Text = dbloc;
+                loadItems();
+            }
+
         }
     }
 }
