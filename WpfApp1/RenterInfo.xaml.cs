@@ -39,14 +39,31 @@ namespace RentalApp
                 AppDomain.CurrentDomain.SetData("DataDirectory", path);
                 dbloc = @"Data Source=|DataDirectory|\DataFile\RentalDatabase.db";
             }
-
             using (SQLiteConnection conn = new SQLiteConnection(dbloc))
             {
                 conn.Open();
                 // SQLiteCommand command = new SQLiteCommand("INSERT into RentalAddress (ID,Address,RenterID) Values (4,'ss',0)", conn);
                 //command.ExecuteNonQuery();
-                SQLiteCommand command1 = new SQLiteCommand("Select * from Renter WHERE AddressID= "+this.addressID, conn);
+                SQLiteCommand command1 = new SQLiteCommand("Select * from RentalAddress WHERE ID= " + this.addressID, conn);
                 SQLiteDataReader reader = command1.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    //Console.WriteLine(reader["YourColumn"]);
+                    colorZoneText.Text = "Renters renting From:  "+reader["Address"].ToString();
+                    //renterList.Add(new Renter(Convert.ToInt32(reader["ID"]), reader["TenantName"].ToString(), reader["Phone"].ToString(), reader["Email"].ToString(), double.Parse(reader["Rent"].ToString()), reader["StartDate"].ToString(), reader["EndDate"].ToString(), double.Parse(reader["Deposit"].ToString()), double.Parse(reader["CleaningDeposit"].ToString()), double.Parse(reader["KeyDeposit"].ToString()), reader["Renewal_in_30"].ToString(), reader["Renewal_in_90"].ToString(), reader["DepositDate"].ToString(), reader["KeyDepositDate"].ToString(), reader["CleaningDepositDate"].ToString()));
+
+                }
+                reader.Close();
+               
+            }
+            using (SQLiteConnection conn = new SQLiteConnection(dbloc))
+            {
+                conn.Open();
+                // SQLiteCommand command = new SQLiteCommand("INSERT into RentalAddress (ID,Address,RenterID) Values (4,'ss',0)", conn);
+                //command.ExecuteNonQuery();
+                SQLiteCommand command2 = new SQLiteCommand("Select * from Renter WHERE AddressID= "+this.addressID, conn);
+                SQLiteDataReader reader = command2.ExecuteReader();
 
                 while (reader.Read())
                 {

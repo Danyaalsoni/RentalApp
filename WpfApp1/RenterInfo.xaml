@@ -15,8 +15,9 @@
 
             <StackPanel>
                 <TextBlock
+                    x:Name="colorZoneText"
                     VerticalAlignment="Center"
-                    Margin="16 0 0 0"><Run Text="Renters:"/></TextBlock>
+                    Margin="16 0 0 0"></TextBlock>
             </StackPanel>
 
         </materialDesign:ColorZone>

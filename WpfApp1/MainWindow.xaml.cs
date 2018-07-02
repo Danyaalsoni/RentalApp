@@ -66,11 +66,11 @@ namespace RentalApp
             var item = ((FrameworkElement)e.OriginalSource).DataContext;
             if (item != null)
             {
-                MessageBox.Show(item.ToString()+"Item's Double Click handled!");
+                //MessageBox.Show(item.ToString()+"Item's Double Click handled!");
+                //load renter window
+                RenterInfo renterInfoWindow = new RenterInfo(int.Parse(item.ToString()));
+                renterInfoWindow.ShowDialog();
             }
-            //load renter window
-            RenterInfo renterInfoWindow = new RenterInfo(int.Parse(item.ToString()));
-            renterInfoWindow.ShowDialog();
             loadItems();
         }
 
