@@ -27,6 +27,19 @@ namespace WpfApp1
         {
             InitializeComponent();
             dbloc = ((MainWindow)Application.Current.MainWindow).dbloc;
+            addNameBox.IsEnabled = false;
+            addPhoneNumberBox.IsEnabled = false;
+            addEmailBox.IsEnabled = false;
+            addRentBox.IsEnabled = false;
+            addStartDateBox.IsEnabled = false;
+            addEndDateBox.IsEnabled = false;
+            addDepositBox.IsEnabled = false;
+            addDepositDateBox.IsEnabled = false;
+            addCleaningDepositBox.IsEnabled = false;
+            addCleaningDateBox.IsEnabled = false;
+            addKeyDateBox.IsEnabled = false;
+            addKeyDepositBox.IsEnabled = false;
+            addRenewalCombo.IsEnabled = false;
 
         }
 
@@ -59,6 +72,19 @@ namespace WpfApp1
             addstreetAddressBox.IsEnabled = false;
             Button bt = (Button)sender;
             bt.IsEnabled = false;
+            addNameBox.IsEnabled = true;
+            addPhoneNumberBox.IsEnabled = true;
+            addEmailBox.IsEnabled = true;
+            addRentBox.IsEnabled = true;
+            addStartDateBox.IsEnabled = true;
+            addEndDateBox.IsEnabled = true;
+            addDepositBox.IsEnabled = true;
+            addDepositDateBox.IsEnabled = true;
+            addCleaningDepositBox.IsEnabled = true;
+            addCleaningDateBox.IsEnabled = true;
+            addKeyDateBox.IsEnabled = true;
+            addKeyDepositBox.IsEnabled = true;
+            addRenewalCombo.IsEnabled = true;
         }
         private void Save_Button_Click(object sender, RoutedEventArgs e)
         {

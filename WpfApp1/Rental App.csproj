@@ -30,6 +30,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <HockeyAppResourceId>d33674e74855440cab79ba3c34e5b68d</HockeyAppResourceId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
