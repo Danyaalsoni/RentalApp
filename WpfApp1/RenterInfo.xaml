@@ -1,12 +1,44 @@
-﻿<Window x:Class="RentalApp.Window1"
+﻿<Window x:Class="RentalApp.RenterInfo"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RentalApp"
+        xmlns:SQLite="clr-namespace:System.Data.SQLite;assembly=System.Data.SQLite"
         mc:Ignorable="d"
-        Title="Renter Information" Height="450" Width="800">
+        Title="Renter Information" Height="450" Width="1000">
     <Grid>
-        
+        <materialDesign:ColorZone
+            Mode="PrimaryDark"
+            Padding="16">
+
+            <StackPanel>
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Margin="16 0 0 0"><Run Text="Renters:"/></TextBlock>
+            </StackPanel>
+
+        </materialDesign:ColorZone>
+        <ListView x:Name="renterListView" HorizontalAlignment="Left" Height="302" Margin="10,61,0,0" VerticalAlignment="Top" Width="963">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Renter ID" DisplayMemberBinding="{Binding ID}"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding TenantName}"/>
+                    <GridViewColumn Header="Email Address" DisplayMemberBinding="{Binding Email}"/>
+                    <GridViewColumn Header="Phone Number" DisplayMemberBinding="{Binding Phone}"/>
+                    <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding StartDate}"/>
+                    <GridViewColumn Header="End Date" DisplayMemberBinding="{Binding EndDate}"/>
+                    <GridViewColumn Header="Rent" DisplayMemberBinding="{Binding Rent}"/>
+                    <GridViewColumn Header="Deposit" DisplayMemberBinding="{Binding deposit}"/>
+                    <GridViewColumn Header="Renewal" DisplayMemberBinding="{Binding Renewal}"/>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Done" HorizontalAlignment="Left" Margin="837,368,0,0" VerticalAlignment="Top" Width="136" Style="{StaticResource MaterialDesignRaisedDarkButton}"/>
+        <Button Content="Add Renter" HorizontalAlignment="Left" Margin="20,368,0,0" VerticalAlignment="Top" Width="136"/>
+        <Button Content="Edit Renter" HorizontalAlignment="Left" Margin="174,368,0,0" VerticalAlignment="Top" Width="136"/>
+        <Button Content="Edit Address" HorizontalAlignment="Left" Margin="330,368,0,0" VerticalAlignment="Top" Width="136"/>
     </Grid>
 </Window>

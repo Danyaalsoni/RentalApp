@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace WpfApp1
+namespace RentalApp
 {
     /// <summary>
     /// Interaction logic for AddRentalAddress.xaml
@@ -23,6 +23,7 @@ namespace WpfApp1
     {
         List<Renter> renterList = new List<Renter>();
         string dbloc;
+        int addressID;
         public AddRentalAddress()
         {
             InitializeComponent();
@@ -112,6 +113,7 @@ namespace WpfApp1
                         while (reader1.Read())
                         {
                             count=Convert.ToInt32(reader1["ID"]);
+                            addressID = count;
                         }
                     }
                     catch (Exception)
@@ -201,7 +203,7 @@ namespace WpfApp1
             tenantName = addNameBox.Text;
             phoneNumber = addPhoneNumberBox.Text;
             emailAddress = addEmailBox.Text;
-            renewal = addRenewalCombo.Text;
+            renewal = addRenewalCombo.SelectedValue.ToString();
             startDate = addStartDateBox.Text;
             endDate = addEndDateBox.Text;
             depositDate = addDepositDateBox.Text;
@@ -288,9 +290,11 @@ namespace WpfApp1
             if(renewal== "Renewal in 30")
             {
                 renewalin30 = "YES";
-            }else if(renewal== " Renewal in 90")
+                renewalin90 = "NO";
+            }else if(renewal== "Renewal in 90")
             {
                 renewalin90 = "YES";
+                renewalin30 = "NO";
             }
             else
             {
@@ -304,7 +308,7 @@ namespace WpfApp1
                 using (SQLiteConnection conn = new SQLiteConnection(dbloc))
                 {
                     conn.Open();
-                    SQLiteCommand command1 = new SQLiteCommand("Select * from Renter where TenantName ='" + tenantName+"'", conn);
+                    SQLiteCommand command1 = new SQLiteCommand("Select * from Renter where TenantName ='" + tenantName+"'" + "AND AddressID="+ addressID, conn);
                     SQLiteDataReader reader = command1.ExecuteReader();
                     if (reader.HasRows)
                     {

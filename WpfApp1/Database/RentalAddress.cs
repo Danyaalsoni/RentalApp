@@ -8,7 +8,7 @@ using System.Data.SQLite;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
-namespace WpfApp1.Database
+namespace RentalApp.Database
 {
     
     class RentalAddress

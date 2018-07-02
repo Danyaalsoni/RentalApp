@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using WpfApp1.Database;
+using RentalApp.Database;
 using System.Data.SQLite;
 using Excel = Microsoft.Office.Interop.Excel;
 
-namespace WpfApp1
+
+namespace RentalApp
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -68,6 +69,9 @@ namespace WpfApp1
                 MessageBox.Show(item.ToString()+"Item's Double Click handled!");
             }
             //load renter window
+            RenterInfo renterInfoWindow = new RenterInfo(int.Parse(item.ToString()));
+            renterInfoWindow.ShowDialog();
+            loadItems();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

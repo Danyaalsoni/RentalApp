@@ -8,7 +8,7 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WpfApp1
+namespace RentalApp
 {
    
     public class Renter
@@ -26,6 +26,7 @@ namespace WpfApp1
         public int AddressID { get; set; }
         public string Renewal_in_30 { get; set; }
         public string Renewal_in_90 { get; set; }
+        public string Renewal { get; set; }
         public string cleaningDepositDate { get; set; }
         public string keyDepositDate { get; set; }
         public string depositDate { get; set; }
@@ -45,7 +46,19 @@ namespace WpfApp1
             this.cleaningDepositDate = cleaningDepositDate;
             this.depositDate = depositDate;
             this.keyDepositDate = keyDepositDate;
-
+            this.Renewal_in_30 = ren30;
+            this.Renewal_in_90 = ren90;
+            if (ren30 == "YES" && ren90 == "NO")
+            {
+                this.Renewal = "Renewal in 30 Days";
+            }else if (ren90=="YES" && ren30 == "NO")
+            {
+                this.Renewal = "Renewal in 90 Days";
+            }
+            else
+            {
+                this.Renewal = "No Renewal";
+            }
         }
 
         public Renter(int ID,string name, string phone, string email, double rent, string start, string end, double deposit, double cleaningDeposit, double keyDeposit, string ren30, string ren90, string depositDate, string keyDepositDate, string cleaningDepositDate)
@@ -63,6 +76,20 @@ namespace WpfApp1
             this.cleaningDepositDate = cleaningDepositDate;
             this.depositDate = depositDate;
             this.keyDepositDate = keyDepositDate;
+            this.Renewal_in_30 = ren30;
+            this.Renewal_in_90 = ren90;
+            if (ren30 == "YES")
+            {
+                this.Renewal = "Renewal in 30 Days";
+            }
+            else if (ren90 == "YES")
+            {
+                this.Renewal = "Renewal in 90 Days";
+            }
+            else
+            {
+                this.Renewal = "No Renewal";
+            }
         }
     }
 }
