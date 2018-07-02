@@ -30,6 +30,7 @@ namespace RentalApp
             InitializeComponent();
             dbloc = ((MainWindow)Application.Current.MainWindow).dbloc;
             renterListView.ClipToBounds = true;
+            addstreetAddressBox.IsEnabled = false;
            // renterListView.IsHitTestVisible = false;
             if (dbloc == "")
             {
@@ -65,6 +66,44 @@ namespace RentalApp
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
             var row = renterListView.SelectedItem as DataRowView;
+        }
+        bool editFlag = true;
+        private void Edit_Address_Click(object sender, RoutedEventArgs e)
+        {
+            if (editFlag)
+            {
+                addstreetAddressBox.IsEnabled = true;
+                editAddressButton.Content = "Save Address";
+                editFlag = false;
+            }
+            else
+            {
+                string address= addstreetAddressBox.Text;
+                if (address == "")
+                {
+                    MessageBox.Show("Please enter address");
+
+                }
+                else
+                {
+                    using (SQLiteConnection conn = new SQLiteConnection(dbloc))
+                    {
+                        conn.Open();
+                        SQLiteCommand command1 = new SQLiteCommand("UPDATE RentalAddress SET Address=:address WHERE ID=:id", conn);
+                        command1.Parameters.Add("address", DbType.String).Value = address;
+                        command1.Parameters.Add("id", DbType.Int32).Value = addressID;
+                        command1.ExecuteNonQuery();
+                    }
+                    addstreetAddressBox.IsEnabled = false;
+                    editAddressButton.Content = "Edit Address";
+                    editFlag = true;
+                    MessageBox.Show("Updated successfully");
+                }
+            }
+        }
+        private void Add_Renter_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 

@@ -151,8 +151,8 @@ namespace RentalApp
                         
                     }
                 }
-                
-                
+
+                MessageBox.Show("Saved successfully");
                 this.Close();
             }
             catch (Exception ex)
