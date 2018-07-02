@@ -1,23 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WpfApp1.Database;
 using System.Data.SQLite;
-using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Data.Entity.Infrastructure;
-using System.Data.Common;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace WpfApp1
 {
@@ -29,6 +16,7 @@ namespace WpfApp1
         /// <summary>
         /// 
         /// </summary>
+        public string origdbloc;
         public string dbloc="";
         public MainWindow()
         {
@@ -79,6 +67,7 @@ namespace WpfApp1
             {
                 MessageBox.Show(item.ToString()+"Item's Double Click handled!");
             }
+            //load renter window
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -102,12 +91,80 @@ namespace WpfApp1
             if (res.HasValue && res.Value)
             {
                 dbloc = dlg.FileName;
-
+                origdbloc = dbloc;
                 dbloc = @"Data Source=" + dbloc;
                 DatabaseLocationText.Text = dbloc;
                 loadItems();
             }
 
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Excel.Application xlApp;
+            Excel.Workbook xlWorkBook;
+            Excel.Worksheet xlWorkSheet;
+            object misValue = System.Reflection.Missing.Value;
+            xlApp = new Excel.Application();
+            xlWorkBook = xlApp.Workbooks.Add(misValue);
+            xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+            string data = string.Empty;
+            int i=1, j = 0;
+            bool flag = true;
+            using (SQLiteConnection conn = new SQLiteConnection(dbloc))
+            {
+                conn.Open();
+                string stm = "SELECT * FROM RentalAddress INNER JOIN Renter ON RentalAddress.ID=Renter.AddressID";
+                using (SQLiteCommand cmd = new SQLiteCommand(stm, conn))
+                {
+                    using (SQLiteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        
+                        while (rdr.Read()) // Reading Rows
+                        {
+                            if (flag)
+                            {
+                                for (j = 0; j <= rdr.FieldCount - 1; j++)
+                                {
+                                    xlWorkSheet.Cells[i, j + 1] = rdr.GetName(j);
+                                }
+                                flag = false;
+                            }
+                            for (j = 0; j <= rdr.FieldCount - 1; j++) // Looping throw colums
+                            {
+                                data = rdr.GetValue(j).ToString();
+                                xlWorkSheet.Cells[i + 1, j + 1] = data;
+                            }
+                            i++;
+                        }
+                    }
+                }
+                conn.Close();
+            }
+            xlWorkBook.SaveAs("Renter Datasheet.xls", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+            xlWorkBook.Close(true, misValue, misValue);
+            xlApp.Quit();
+
+            releaseObject(xlWorkSheet);
+            releaseObject(xlWorkBook);
+            releaseObject(xlApp);
+
+        }
+        private static void releaseObject(object obj)
+        {
+            try
+            {
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
+                obj = null;
+            }
+            catch (Exception ex)
+            {
+                obj = null;
+            }
+            finally
+            {
+                GC.Collect();
+            }
         }
     }
 }

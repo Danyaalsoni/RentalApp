@@ -30,6 +30,36 @@ namespace WpfApp1
 
         }
 
+        private void Add_Address_Click(object sender, RoutedEventArgs e)
+        {
+            string address = addstreetAddressBox.Text;
+            if (dbloc == "")
+            {
+                string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                string path = (System.IO.Path.GetDirectoryName(executable));
+                AppDomain.CurrentDomain.SetData("DataDirectory", path);
+                dbloc = @"Data Source=|DataDirectory|\DataFile\RentalDatabase.db";
+            }
+
+            if (address == "")
+            {
+                MessageBox.Show("Please Enter Street Address");
+                return;
+            }
+            if (checkAddress(address))
+            {
+                using (SQLiteConnection conn = new SQLiteConnection(dbloc))
+                {
+                    conn.Open();
+                    SQLiteCommand command2 = new SQLiteCommand("INSERT INTO RentalAddress (Address) VALUES (@param1)", conn);
+                    command2.Parameters.Add(new SQLiteParameter("@param1", address));
+                    command2.ExecuteNonQuery();
+                }
+            }
+            addstreetAddressBox.IsEnabled = false;
+            Button bt = (Button)sender;
+            bt.IsEnabled = false;
+        }
         private void Save_Button_Click(object sender, RoutedEventArgs e)
         {
             string address = addstreetAddressBox.Text;
@@ -41,11 +71,7 @@ namespace WpfApp1
                 AppDomain.CurrentDomain.SetData("DataDirectory", path);
                 dbloc = @"Data Source=|DataDirectory|\DataFile\RentalDatabase.db";
             }
-            if (address == "")
-            {
-                MessageBox.Show("Please Enter Street Address");
-                return;
-            }
+           
             try
             {
                 using (SQLiteConnection conn = new SQLiteConnection(dbloc))
@@ -54,12 +80,12 @@ namespace WpfApp1
                     conn.Open();
                     try
                     {
-                        SQLiteCommand command = new SQLiteCommand("SELECT * from RentalAddress ", conn);
+                        SQLiteCommand command = new SQLiteCommand("SELECT * from RentalAddress WHERE Address="+"'"+address+"'", conn);
                         SQLiteDataReader reader1 = command.ExecuteReader();
 
                         while (reader1.Read())
                         {
-                            count++;
+                            count=Convert.ToInt32(reader1["ID"]);
                         }
                     }
                     catch (Exception)
@@ -94,28 +120,11 @@ namespace WpfApp1
                             command1.Parameters.Add(new SQLiteParameter("@param15", renter.depositDate));
                             command1.ExecuteNonQuery();
                         }
-                        if (checkAddress(address))
-                        {
-                            SQLiteCommand command2 = new SQLiteCommand("INSERT INTO RentalAddress (Address) VALUES (@param1)", conn);
-                            command2.Parameters.Add(new SQLiteParameter("@param1", address));
-                            command2.ExecuteNonQuery();
-                        }
+                        
                     }
                 }
-                else
-                {
-                   
-                    using (SQLiteConnection conn = new SQLiteConnection(dbloc))
-                    {
-                        conn.Open();
-                        if (checkAddress(address))
-                        {
-                            SQLiteCommand command3 = new SQLiteCommand("INSERT INTO RentalAddress (Address) VALUES (@param1)", conn);
-                            command3.Parameters.Add(new SQLiteParameter("@param1", address));
-                            command3.ExecuteNonQuery();
-                        }
-                    }
-                }
+                
+                
                 this.Close();
             }
             catch (Exception ex)

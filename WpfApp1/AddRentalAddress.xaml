@@ -30,7 +30,7 @@
         </ListView>
         <Separator HorizontalAlignment="Left" Height="44" Margin="0,102,0,0" VerticalAlignment="Top" Width="782" RenderTransformOrigin="0.335,0.275"/>
 
-        <Button Content="Save Address" HorizontalAlignment="Left" Margin="624,515,0,0" VerticalAlignment="Top" Width="139" Click="Save_Button_Click"  Style="{StaticResource MaterialDesignRaisedDarkButton}"/>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="624,515,0,0" VerticalAlignment="Top" Width="139" Click="Save_Button_Click"  Style="{StaticResource MaterialDesignRaisedDarkButton}"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="468,515,0,0" VerticalAlignment="Top" Width="139" Click="Cancel_Button_Click" Style="{StaticResource MaterialDesignRaisedLightButton}" />
 
         <TextBox x:Name="addstreetAddressBox" HorizontalAlignment="Left" Height="46" Margin="126,51,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="481" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Enter Street Address"/>
@@ -64,6 +64,7 @@
         <DatePicker x:Name="addCleaningDateBox" HorizontalAlignment="Left" Margin="434,229,0,0" VerticalAlignment="Top" RenderTransformOrigin="9.396,-0.002" Width="148" materialDesign:HintAssist.Hint="Cleaning Deposit Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="25"/>
         <DatePicker x:Name="addKeyDateBox" HorizontalAlignment="Left" Margin="434,278,0,0" VerticalAlignment="Top" RenderTransformOrigin="9.396,-0.002" Width="148" materialDesign:HintAssist.Hint="Key Deposit Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="25"/>
         <DatePicker x:Name="addDepositDateBox" HorizontalAlignment="Left" Margin="434,163,0,0" VerticalAlignment="Top" RenderTransformOrigin="9.396,-0.002" Width="148" materialDesign:HintAssist.Hint="Deposit Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="25"/>
+        <Button Content="Add Address" HorizontalAlignment="Left" Margin="645,70,0,0" VerticalAlignment="Top" Width="118" Click="Add_Address_Click"/>
 
     </Grid>
 </Window>
