@@ -29,10 +29,11 @@
         </materialDesign:ColorZone>
         <Grid x:Name="Main_Grid">
 
-            <Button Content="Add Rental Address and Renters" HorizontalAlignment="Left" Margin="532,362,0,0" VerticalAlignment="Top" Width="241"  Style="{StaticResource MaterialDesignRaisedDarkButton}" Click="Button_Click"/>
+            <Button Content="Add Rental Address and Renters" HorizontalAlignment="Left" Margin="541,377,0,0" VerticalAlignment="Top" Width="241"  Style="{StaticResource MaterialDesignRaisedDarkButton}" Click="Button_Click"/>
             <ListView x:Name="listView" HorizontalAlignment="Left" Height="280" Margin="21,61,0,0" VerticalAlignment="Top" Width="752" MouseDoubleClick="ListView_MouseDoubleClick">
                 <ListView.View>
                     <GridView>
+                        <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ID}"/>
                         <GridViewColumn Header="Street Address" DisplayMemberBinding="{Binding address}"/>
                         <GridViewColumn Header="Number of Renters" DisplayMemberBinding="{Binding renters}"/>
                     </GridView>
@@ -40,7 +41,8 @@
             </ListView>
             <Button Content="Add Database" HorizontalAlignment="Left" Margin="290,341,0,0" VerticalAlignment="Top" Width="128" Style="{StaticResource MaterialDesignRaisedAccentButton}" Click="Button_Click_1"/>
             <TextBlock x:Name="DatabaseLocationText"  HorizontalAlignment="Left" Height="58" Margin="10,341,0,0" TextWrapping="Wrap" Text="Db Location" VerticalAlignment="Top" Width="264" FontSize="14"/>
-            <Button Content="Save to Excel" HorizontalAlignment="Left" Margin="290,377,0,10" Width="128" Height="Auto" Style="{StaticResource MaterialDesignRaisedAccentButton}" Click="Button_Click_2"/>
+            <Button Content="Save to Excel" HorizontalAlignment="Left" Margin="290,377,0,10" Width="128" Height="35" Style="{StaticResource MaterialDesignRaisedAccentButton}" Click="Button_Click_2"/>
+            <Button Content="Delete Address" HorizontalAlignment="Left" Margin="654,340,0,0" VerticalAlignment="Top" Width="128" Style="{StaticResource MaterialDesignRaisedAccentButton}" Click="Delete_Address_Click"/>
 
         </Grid>
     </Grid>

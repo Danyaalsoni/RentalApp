@@ -5,7 +5,7 @@ using System.Windows.Input;
 using RentalApp.Database;
 using System.Data.SQLite;
 using Excel = Microsoft.Office.Interop.Excel;
-
+using System.Data;
 
 namespace RentalApp
 {
@@ -63,14 +63,21 @@ namespace RentalApp
         }
         public void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var item = ((FrameworkElement)e.OriginalSource).DataContext;
-            if (item != null)
+            RentalAddress rowID;
+            int id=-1;
+            rowID = listView.SelectedItem as RentalAddress;
+            if (rowID != null)
             {
-                //MessageBox.Show(item.ToString()+"Item's Double Click handled!");
-                //load renter window
-                RenterInfo renterInfoWindow = new RenterInfo(int.Parse(item.ToString()));
-                renterInfoWindow.ShowDialog();
+                id = rowID.ID;
             }
+           // var item = ((FrameworkElement)e.OriginalSource).DataContext;
+            //if (item != null)
+            //{
+            // MessageBox.Show(id.ToString()+"Item's Double Click handled!");
+             //load renter window
+             RenterInfo renterInfoWindow = new RenterInfo(int.Parse(id.ToString()));
+             renterInfoWindow.ShowDialog();
+            //}
             loadItems();
         }
 
@@ -81,7 +88,32 @@ namespace RentalApp
             loadItems();
            
         }
-
+       
+        private void Delete_Address_Click(object sender, RoutedEventArgs e)
+        {
+            //listView.
+            while (listView.SelectedItems.Count > 0)
+            {
+                int id=-1;
+                RentalAddress addr = listView.SelectedItems[0] as RentalAddress;
+                if (addr != null)
+                {
+                    id = addr.ID;
+                }
+                using (SQLiteConnection conn = new SQLiteConnection(dbloc))
+                {
+                    conn.Open();
+                    // SQLiteCommand command = new SQLiteCommand("INSERT into RentalAddress (ID,Address,RenterID) Values (4,'ss',0)", conn);
+                    //command.ExecuteNonQuery();
+                    SQLiteCommand command1 = new SQLiteCommand("DELETE FROM Renter WHERE AddressID="+id, conn);
+                    command1.ExecuteNonQuery();
+                    SQLiteCommand command2 = new SQLiteCommand("DELETE FROM RentalAddress WHERE ID=" + id, conn);
+                    command2.ExecuteNonQuery();
+                }
+                listView.Items.Remove(listView.SelectedItems[0]);
+            }
+            MessageBox.Show("Delete successfull");
+        }
         /// <summary>
         /// 
         /// </summary>

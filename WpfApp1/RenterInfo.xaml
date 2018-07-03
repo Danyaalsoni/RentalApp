@@ -21,7 +21,7 @@
             </StackPanel>
 
         </materialDesign:ColorZone>
-        <ListView x:Name="renterListView" HorizontalAlignment="Left" Height="302" Margin="10,61,0,0" VerticalAlignment="Top" Width="963">
+        <ListView x:Name="renterListView" HorizontalAlignment="Left" Height="302" Margin="10,61,0,0" VerticalAlignment="Top" Width="963" MouseDoubleClick="ListView_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Renter ID" DisplayMemberBinding="{Binding ID}"/>
@@ -37,7 +37,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Done" HorizontalAlignment="Left" Margin="837,368,0,0" VerticalAlignment="Top" Width="136" Style="{StaticResource MaterialDesignRaisedDarkButton}"/>
+        <Button Content="Done" HorizontalAlignment="Left" Margin="837,368,0,0" VerticalAlignment="Top" Width="136" Style="{StaticResource MaterialDesignRaisedDarkButton}" Click="done_click"/>
         <Button Content="Add Renter" HorizontalAlignment="Left" Margin="20,368,0,0" VerticalAlignment="Top" Width="136" Click="Add_Renter_Click"/>
         <Button Content="Edit Renter" HorizontalAlignment="Left" Margin="174,368,0,0" VerticalAlignment="Top" Width="136" Click="Edit_Click"/>
         <Button x:Name="editAddressButton"  Content="Edit Address" HorizontalAlignment="Left" Margin="714,368,0,0" VerticalAlignment="Top" Width="118" Click="Edit_Address_Click"/>
