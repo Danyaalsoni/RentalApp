@@ -30,8 +30,9 @@ namespace RentalApp
         public string cleaningDepositDate { get; set; }
         public string keyDepositDate { get; set; }
         public string depositDate { get; set; }
+        public string rentDueDate { get; set; }
 
-        public Renter(string name,string phone,string email,double rent,string start,string end,double deposit,double cleaningDeposit,double keyDeposit,string ren30,string ren90,string depositDate,string keyDepositDate,string cleaningDepositDate)
+        public Renter(string name,string phone,string email,double rent,string start,string end,double deposit,double cleaningDeposit,double keyDeposit,string ren30,string ren90,string depositDate,string keyDepositDate,string cleaningDepositDate,string rentDueDate)
         {
             //this.ID = ID;
             this.TenantName = name;
@@ -48,6 +49,7 @@ namespace RentalApp
             this.keyDepositDate = keyDepositDate;
             this.Renewal_in_30 = ren30;
             this.Renewal_in_90 = ren90;
+            this.rentDueDate = rentDueDate;
             if (ren30 == "YES" && ren90 == "NO")
             {
                 this.Renewal = "Renewal in 30 Days";
@@ -61,7 +63,7 @@ namespace RentalApp
             }
         }
 
-        public Renter(int ID,string name, string phone, string email, double rent, string start, string end, double deposit, double cleaningDeposit, double keyDeposit, string ren30, string ren90, string depositDate, string keyDepositDate, string cleaningDepositDate)
+        public Renter(int ID,string name, string phone, string email, double rent, string start, string end, double deposit, double cleaningDeposit, double keyDeposit, string ren30, string ren90, string depositDate, string keyDepositDate, string cleaningDepositDate, string rentDueDate)
         {
             this.ID = ID;
             this.TenantName = name;
@@ -78,6 +80,7 @@ namespace RentalApp
             this.keyDepositDate = keyDepositDate;
             this.Renewal_in_30 = ren30;
             this.Renewal_in_90 = ren90;
+            this.rentDueDate = rentDueDate;
             if (ren30 == "YES")
             {
                 this.Renewal = "Renewal in 30 Days";

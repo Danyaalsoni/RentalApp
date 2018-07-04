@@ -48,6 +48,8 @@
         <DatePicker x:Name="addKeyDateBox" HorizontalAlignment="Left" Margin="563,207,0,0" VerticalAlignment="Top" RenderTransformOrigin="9.396,-0.002" Width="194" materialDesign:HintAssist.Hint="Key Deposit Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="27"/>
         <DatePicker x:Name="addDepositDateBox" HorizontalAlignment="Left" Margin="563,79,0,0" VerticalAlignment="Top" RenderTransformOrigin="9.396,-0.002" Width="194" materialDesign:HintAssist.Hint="Deposit Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="27"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="474,355,0,0" VerticalAlignment="Top" Width="108" Height="36" Click="Button_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="329,307,0,0" TextWrapping="Wrap" Text="Rent Due:" VerticalAlignment="Top" RenderTransformOrigin="-2.404,-0.69" Height="21" FontSize="14"/>
+        <DatePicker x:Name="addrentDateBox" HorizontalAlignment="Left" Margin="424,305,0,0" VerticalAlignment="Top" RenderTransformOrigin="9.396,-0.002" Width="132" materialDesign:HintAssist.Hint="Enter Rent Due Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="38"/>
 
     </Grid>
 </Window>

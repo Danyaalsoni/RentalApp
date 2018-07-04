@@ -31,9 +31,9 @@
                     <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding StartDate}"/>
                     <GridViewColumn Header="End Date" DisplayMemberBinding="{Binding EndDate}"/>
                     <GridViewColumn Header="Rent" DisplayMemberBinding="{Binding Rent}"/>
+                    <GridViewColumn Header="Rent Due Date" DisplayMemberBinding="{Binding rentDueDate}"/>
                     <GridViewColumn Header="Deposit" DisplayMemberBinding="{Binding deposit}"/>
                     <GridViewColumn Header="Renewal" DisplayMemberBinding="{Binding Renewal}"/>
-
                 </GridView>
             </ListView.View>
         </ListView>

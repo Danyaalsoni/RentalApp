@@ -193,7 +193,7 @@ namespace RentalApp
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);
                 obj = null;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 obj = null;
             }

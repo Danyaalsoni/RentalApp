@@ -79,7 +79,7 @@ namespace RentalApp
                 {
                     //Console.WriteLine(reader["YourColumn"]);
 
-                    renterList.Add(new Renter(Convert.ToInt32(reader["ID"]), reader["TenantName"].ToString(), reader["Phone"].ToString(), reader["Email"].ToString(), double.Parse(reader["Rent"].ToString()), reader["StartDate"].ToString(), reader["EndDate"].ToString(), double.Parse(reader["Deposit"].ToString()), double.Parse(reader["CleaningDeposit"].ToString()), double.Parse(reader["KeyDeposit"].ToString()), reader["Renewal_in_30"].ToString(), reader["Renewal_in_90"].ToString(), reader["DepositDate"].ToString(), reader["KeyDepositDate"].ToString(), reader["CleaningDepositDate"].ToString()));
+                    renterList.Add(new Renter(Convert.ToInt32(reader["ID"]), reader["TenantName"].ToString(), reader["Phone"].ToString(), reader["Email"].ToString(), double.Parse(reader["Rent"].ToString()), reader["StartDate"].ToString(), reader["EndDate"].ToString(), double.Parse(reader["Deposit"].ToString()), double.Parse(reader["CleaningDeposit"].ToString()), double.Parse(reader["KeyDeposit"].ToString()), reader["Renewal_in_30"].ToString(), reader["Renewal_in_90"].ToString(), reader["DepositDate"].ToString(), reader["KeyDepositDate"].ToString(), reader["CleaningDepositDate"].ToString(), reader["RentDate"].ToString()));
 
                 }
                 reader.Close();

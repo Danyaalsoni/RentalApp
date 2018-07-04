@@ -58,11 +58,13 @@
             <ComboBoxItem Content="Renewal in 90"/>
             <ComboBoxItem Content="No Renewal"/>
         </ComboBox>
-        <Button Content="Add Renter" HorizontalAlignment="Left" Margin="475,400,0,0" VerticalAlignment="Top" Width="120" Click="Add_Renter_Button_Click"/>
+        <Button Content="Add Renter" HorizontalAlignment="Left" Margin="475,431,0,0" VerticalAlignment="Top" Width="120" Click="Add_Renter_Button_Click"/>
         <DatePicker x:Name="addCleaningDateBox" HorizontalAlignment="Left" Margin="447,229,0,0" VerticalAlignment="Top" RenderTransformOrigin="9.396,-0.002" Width="148" materialDesign:HintAssist.Hint="Cleaning Deposit Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="25"/>
         <DatePicker x:Name="addKeyDateBox" HorizontalAlignment="Left" Margin="447,278,0,0" VerticalAlignment="Top" RenderTransformOrigin="9.396,-0.002" Width="148" materialDesign:HintAssist.Hint="Key Deposit Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="25"/>
         <DatePicker x:Name="addDepositDateBox" HorizontalAlignment="Left" Margin="447,163,0,0" VerticalAlignment="Top" RenderTransformOrigin="9.396,-0.002" Width="148" materialDesign:HintAssist.Hint="Deposit Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="25"/>
         <Button Content="Add Address" HorizontalAlignment="Left" Margin="645,70,0,0" VerticalAlignment="Top" Width="118" Click="Add_Address_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="265,385,0,0" TextWrapping="Wrap" Text="Rent Due:" VerticalAlignment="Top" RenderTransformOrigin="-2.404,-0.69" Height="21" FontSize="14"/>
+        <DatePicker x:Name="addrentDateBox" HorizontalAlignment="Left" Margin="339,383,0,0" VerticalAlignment="Top" RenderTransformOrigin="9.396,-0.002" Width="120" materialDesign:HintAssist.Hint="Enter Rent Due Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Height="38"/>
 
     </Grid>
 </Window>

@@ -25,7 +25,6 @@
                     Margin="16 0 0 0"><Run Text="Rentals:"/></TextBlock>
             </StackPanel>
 
-
         </materialDesign:ColorZone>
         <Grid x:Name="Main_Grid">
 

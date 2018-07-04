@@ -64,6 +64,7 @@ namespace RentalApp
                         addKeyDepositBox.Text= reader1["KeyDeposit"].ToString();
                         string ren30 = reader1["Renewal_in_30"].ToString();
                         string ren90 = reader1["Renewal_in_90"].ToString();
+                        addrentDateBox.Text = reader1["RentDate"].ToString();
                        
                         if (ren30 == "YES" && ren90 == "NO")
                         {
@@ -95,7 +96,7 @@ namespace RentalApp
         }
         public void Save_Renter_Button_Click(object sender, RoutedEventArgs e)
         {
-            string tenantName, phoneNumber, emailAddress, renewal, renewalin30 = "NO", renewalin90 = "NO", depositDate = "", cleaningDepositDate = "", keyDepositDate = "";
+            string tenantName, phoneNumber, emailAddress, renewal, renewalin30 = "NO", renewalin90 = "NO", depositDate = "", cleaningDepositDate = "", keyDepositDate = "",rentDueDate="";
             int rent = 0, deposit = 0, cleaningDeposit = 0, keyDeposit = 0;
             string startDate, endDate;
             tenantName = addNameBox.Text;
@@ -107,7 +108,7 @@ namespace RentalApp
             depositDate = addDepositDateBox.Text;
             cleaningDepositDate = addCleaningDateBox.Text;
             keyDepositDate = addKeyDateBox.Text;
-
+            rentDueDate = addrentDateBox.Text;
             bool flag = true, tenantExists = false;
             Renter renter;
             if (dbloc == "")
@@ -121,6 +122,11 @@ namespace RentalApp
             {
                 flag = false;
                 MessageBox.Show("Please enter Tenant Name");
+            }
+            else if (rentDueDate == "")
+            {
+                flag = false;
+                MessageBox.Show("Please enter Rent Due Date");
             }
             else if (cleaningDepositDate == "")
             {
@@ -172,7 +178,7 @@ namespace RentalApp
                 flag = false;
                 MessageBox.Show("Please enter End Date");
             }
-            else if (cleaningDepositDate == "" || depositDate == "" || keyDepositDate == "" || tenantName == "" || renewal == "" || addRentBox.Text == "" || addCleaningDepositBox.Text == "" || addKeyDepositBox.Text == "" || startDate == "" || endDate == "" || phoneNumber == "" || emailAddress == "")
+            else if (rentDueDate=="" || cleaningDepositDate == "" || depositDate == "" || keyDepositDate == "" || tenantName == "" || renewal == "" || addRentBox.Text == "" || addCleaningDepositBox.Text == "" || addKeyDepositBox.Text == "" || startDate == "" || endDate == "" || phoneNumber == "" || emailAddress == "")
             {
                 flag = false;
                 MessageBox.Show("Please Enter Missing Values");
@@ -203,31 +209,9 @@ namespace RentalApp
             if (flag)
             {
 
-
-                using (SQLiteConnection conn = new SQLiteConnection(dbloc))
-                {
-                    conn.Open();
-                    SQLiteCommand command1 = new SQLiteCommand("Select * from Renter where TenantName ='" + tenantName + "'" + "AND AddressID=" + addressID, conn);
-                    SQLiteDataReader reader = command1.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        tenantExists = true;
-                        MessageBox.Show("Renter already exists for this address");
-                    }
-
-                }
-                foreach (Renter r in renterList)
-                {
-                    if (r.TenantName == tenantName)
-                    {
-                        tenantExists = true;
-                        MessageBox.Show("Renter already exists for this address");
-
-                    }
-                }
                 if (!tenantExists)
                 {
-                    renter = new Renter(tenantName, phoneNumber, emailAddress, rent, startDate, endDate, deposit, cleaningDeposit, keyDeposit, renewalin30, renewalin90, depositDate, keyDepositDate, cleaningDepositDate);
+                    renter = new Renter(tenantName, phoneNumber, emailAddress, rent, startDate, endDate, deposit, cleaningDeposit, keyDeposit, renewalin30, renewalin90, depositDate, keyDepositDate, cleaningDepositDate,rentDueDate);
                     renterList.Add(renter);
                 }
 
@@ -249,7 +233,7 @@ namespace RentalApp
                         //command1.Parameters.Add("address", DbType.String).Value = address;
                         //command1.Parameters.Add("id", DbType.Int32).Value = addressID;
 
-                        SQLiteCommand command1 = new SQLiteCommand("UPDATE Renter SET TenantName=:name,Phone=:phone,Email=:email,Rent=:rent,StartDate=:startDate,EndDate=:endDate,Deposit=:deposit,CleaningDeposit=:cleaningDeposit,KeyDeposit=:keyDeposit,Renewal_in_30=:ren30,Renewal_in_90=:ren90,CleaningDepositDate=:cleaningDepDate,KeyDepositDate=:keyDepDate,DepositDate=:depDate WHERE ID=:id AND AddressID=:addressid", conn);
+                        SQLiteCommand command1 = new SQLiteCommand("UPDATE Renter SET TenantName=:name,Phone=:phone,Email=:email,Rent=:rent,StartDate=:startDate,EndDate=:endDate,Deposit=:deposit,CleaningDeposit=:cleaningDeposit,KeyDeposit=:keyDeposit,Renewal_in_30=:ren30,Renewal_in_90=:ren90,CleaningDepositDate=:cleaningDepDate,KeyDepositDate=:keyDepDate,DepositDate=:depDate,RentDate=:rentDueDate WHERE ID=:id AND AddressID=:addressid", conn);
                         command1.Parameters.Add("name",DbType.String).Value= renter.TenantName;
                         command1.Parameters.Add("phone",DbType.String).Value=renter.Phone;
                         command1.Parameters.Add("email",DbType.String).Value=renter.Email;
@@ -266,6 +250,7 @@ namespace RentalApp
                         command1.Parameters.Add("depDate", DbType.String).Value= renter.depositDate;
                         command1.Parameters.Add("id", DbType.Int32).Value = renterID;
                         command1.Parameters.Add("addressid", DbType.Int32).Value = addressID;
+                        command1.Parameters.Add("rentDueDate", DbType.String).Value = renter.rentDueDate;
                         command1.ExecuteNonQuery();
                     }
 

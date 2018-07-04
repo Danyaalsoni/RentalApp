@@ -17,8 +17,6 @@
                     VerticalAlignment="Center"
                     Margin="16 0 0 0"><Run Text="Renter Information: "/></TextBlock>
             </StackPanel>
-
-
         </materialDesign:ColorZone>
     </Grid>
 </Window>
