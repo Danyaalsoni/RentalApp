@@ -5,8 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Windows;
 
 namespace RentalApp.Database
 {
@@ -17,14 +16,20 @@ namespace RentalApp.Database
         public string address { get; set; }
         public int renterID { get; set; }
         public int renters { get; set; }
+        string dbloc;
         public RentalAddress (int ID,string address){
             this.ID = ID;
             this.address = address;
             this.renterID = renterID;
-            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            string path = (System.IO.Path.GetDirectoryName(executable));
-            AppDomain.CurrentDomain.SetData("DataDirectory", path);
-            using (SQLiteConnection conn = new SQLiteConnection(@"Data Source=|DataDirectory|\DataFile\RentalDatabase.db"))
+            dbloc = ((MainWindow)Application.Current.MainWindow).dbloc;
+            if (dbloc == "")
+            {
+                string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                string path = (System.IO.Path.GetDirectoryName(executable));
+                AppDomain.CurrentDomain.SetData("DataDirectory", path);
+                dbloc = @"Data Source=|DataDirectory|\DataFile\RentalDatabase.db";
+            }
+            using (SQLiteConnection conn = new SQLiteConnection(dbloc))
             {
                 conn.Open();
                 this.renters = 0;

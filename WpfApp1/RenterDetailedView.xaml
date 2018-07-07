@@ -10,13 +10,84 @@
     <Grid>
         <materialDesign:ColorZone
             Mode="PrimaryDark"
-            Padding="16">
+            Padding="16" Height="62">
 
             <StackPanel>
                 <TextBlock
                     VerticalAlignment="Center"
-                    Margin="16 0 0 0"><Run Text="Renter Information: "/></TextBlock>
+                    Margin="16 0 0 0" FontSize="24"><Run Text="Renter Information: "/></TextBlock>
             </StackPanel>
         </materialDesign:ColorZone>
+        <TextBlock HorizontalAlignment="Left" Margin="10,80,0,0" TextWrapping="Wrap" Text="Tenant Name:" VerticalAlignment="Top" Height="26" Width="108" FontSize="16" FontWeight="Bold"/>
+        <TextBlock x:Name="nameText"  HorizontalAlignment="Left" Margin="123,80,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="180" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,115,0,0" TextWrapping="Wrap" Text="Phone # :" VerticalAlignment="Top" Height="26" Width="108" FontSize="16" FontWeight="Bold"/>
+        <TextBlock x:Name="phoneText"  HorizontalAlignment="Left" Margin="123,115,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="180" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,150,0,0" TextWrapping="Wrap" Text="Email Address:" VerticalAlignment="Top" Height="26" Width="113" FontSize="16" FontWeight="Bold"/>
+        <TextBlock x:Name="emailText"  HorizontalAlignment="Left" Margin="123,150,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="180" FontSize="16"/>
+        <Button Content="Done" HorizontalAlignment="Left" Margin="682,377,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click" Style="{StaticResource MaterialDesignRaisedDarkButton}"/>
+        <Button Content="Edit" HorizontalAlignment="Left" Margin="576,377,0,0" VerticalAlignment="Top" Width="100" Click="Button_Click_1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,185,0,0" TextWrapping="Wrap" Text="Start Date:" VerticalAlignment="Top" Height="26" Width="108" FontSize="16" FontWeight="Bold"/>
+        <TextBlock x:Name="startDateText"  HorizontalAlignment="Left" Margin="123,185,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="180" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,220,0,0" TextWrapping="Wrap" Text="End Date:" VerticalAlignment="Top" Height="26" Width="108" FontSize="16" FontWeight="Bold"/>
+        <TextBlock x:Name="endDateText"  HorizontalAlignment="Left" Margin="123,220,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="180" FontSize="16"/>
+        <Separator HorizontalAlignment="Left" Height="33" Margin="10,162,0,0" VerticalAlignment="Top" Width="293"/>
+        <TextBlock HorizontalAlignment="Left" Margin="308,80,0,0" TextWrapping="Wrap" Text="Rent:" VerticalAlignment="Top" Height="26" Width="87" FontSize="16" FontWeight="Bold"/>
+        <TextBlock x:Name="RentText"  HorizontalAlignment="Left" Margin="413,80,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="98" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="516,80,0,0" TextWrapping="Wrap" Text="Rent Due:" VerticalAlignment="Top" Height="26" Width="137" FontSize="16" FontWeight="Bold"/>
+        <TextBlock x:Name="rentDateText"  HorizontalAlignment="Left" Margin="658,80,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="127" FontSize="16"/>
+        <Separator HorizontalAlignment="Left" Height="100" Margin="490,43,0,0" VerticalAlignment="Top" Width="27" RenderTransformOrigin="0.5,0.5">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+        <TextBlock HorizontalAlignment="Left" Margin="308,115,0,0" TextWrapping="Wrap" Text="Deposit:" VerticalAlignment="Top" Height="26" Width="87" FontSize="16" FontWeight="Bold"/>
+        <TextBlock x:Name="depositText"  HorizontalAlignment="Left" Margin="413,115,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="98" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="516,115,0,0" TextWrapping="Wrap" Text="Deposit Date:" VerticalAlignment="Top" Height="26" Width="137" FontSize="16" FontWeight="Bold"/>
+        <TextBlock x:Name="depositDateText"  HorizontalAlignment="Left" Margin="658,115,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="127" FontSize="16"/>
+        <Separator HorizontalAlignment="Left" Height="100" Margin="490,78,0,0" VerticalAlignment="Top" Width="27" RenderTransformOrigin="0.5,0.5">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+        <TextBlock HorizontalAlignment="Left" Margin="308,150,0,0" TextWrapping="Wrap" Text="Key Deposit:" VerticalAlignment="Top" Height="26" Width="100" FontSize="16" FontWeight="Bold"/>
+        <TextBlock x:Name="keyDepositText"  HorizontalAlignment="Left" Margin="413,150,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="98" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="516,150,0,0" TextWrapping="Wrap" Text="Key Deposit Date:" VerticalAlignment="Top" Height="26" Width="137" FontSize="16" FontWeight="Bold"/>
+        <TextBlock x:Name="keyDepositDateText"  HorizontalAlignment="Left" Margin="658,150,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="127" FontSize="16"/>
+        <Separator HorizontalAlignment="Left" Height="100" Margin="490,113,0,0" VerticalAlignment="Top" Width="27" RenderTransformOrigin="0.5,0.5">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+        <TextBlock HorizontalAlignment="Left" Margin="308,185,0,0" TextWrapping="Wrap" Text="Cleaning Deposit:" VerticalAlignment="Top" Height="45" Width="100" FontSize="16" FontWeight="Bold"/>
+        <TextBlock x:Name="cleaningDepositText"  HorizontalAlignment="Left" Margin="413,197,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="98" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="516,185,0,0" TextWrapping="Wrap" Text="Cleaning Deposit Date:" VerticalAlignment="Top" Height="45" Width="137" FontSize="16" FontWeight="Bold"/>
+        <TextBlock x:Name="cleaningDepositDateText"  HorizontalAlignment="Left" Margin="658,197,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="127" FontSize="16"/>
+        <Separator HorizontalAlignment="Left" Height="100" Margin="490,160,0,0" VerticalAlignment="Top" Width="27" RenderTransformOrigin="0.5,0.5">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+        <TextBlock HorizontalAlignment="Left" Margin="10,255,0,0" TextWrapping="Wrap" Text="Renewal:" VerticalAlignment="Top" Height="26" Width="108" FontSize="16" FontWeight="Bold"/>
+        <TextBlock x:Name="renewalText"  HorizontalAlignment="Left" Margin="123,255,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="180" FontSize="16"/>
     </Grid>
 </Window>

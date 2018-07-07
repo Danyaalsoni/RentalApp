@@ -46,7 +46,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="252,192,0,0" TextWrapping="Wrap" Text="Key Deposit: " VerticalAlignment="Top" Height="38" Width="65" FontSize="14"/>
         <TextBox x:Name="addKeyDepositBox" HorizontalAlignment="Left" Height="44" Margin="322,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="103" PreviewTextInput="NumberValidationTextBox" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Enter Key Deposit"/>
         <TextBlock HorizontalAlignment="Left" Margin="252,259,0,0" TextWrapping="Wrap" Text="Renewal:" VerticalAlignment="Top" RenderTransformOrigin="-2.404,-0.69" Height="21" FontSize="14"/>
-        <ComboBox x:Name="addRenewalCombo" SelectedValuePath="Content" HorizontalAlignment="Left" Margin="324,252,0,0" VerticalAlignment="Top" Width="101" materialDesign:HintAssist.Hint="Renewal Date">
+        <ComboBox x:Name="addRenewalCombo" SelectedValuePath="Content" HorizontalAlignment="Left" Margin="324,252,0,0" VerticalAlignment="Top" Width="101" materialDesign:HintAssist.Hint="Renewal Status">
             <ComboBoxItem Content="Renewal in 30"/>
             <ComboBoxItem Content="Renewal in 90"/>
             <ComboBoxItem Content="No Renewal"/>

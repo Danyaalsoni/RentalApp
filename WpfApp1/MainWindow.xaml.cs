@@ -130,9 +130,9 @@ namespace RentalApp
                 origdbloc = dbloc;
                 dbloc = @"Data Source=" + dbloc;
                 DatabaseLocationText.Text = dbloc;
-                loadItems();
+               
             }
-
+            loadItems();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

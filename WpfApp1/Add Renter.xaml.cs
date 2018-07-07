@@ -42,18 +42,28 @@ namespace RentalApp
         {
             string tenantName, phoneNumber, emailAddress, renewal, renewalin30 = "NO", renewalin90 = "NO", depositDate = "", cleaningDepositDate = "", keyDepositDate = "",rentDueDate="";
             int rent = 0, deposit = 0, cleaningDeposit = 0, keyDeposit = 0;
+            bool flag = true, tenantExists = false;
             string startDate, endDate;
             tenantName = addNameBox.Text;
             phoneNumber = addPhoneNumberBox.Text;
             emailAddress = addEmailBox.Text;
-            renewal = addRenewalCombo.SelectedValue.ToString();
+            renewal = "No Renewal";
+            try
+            {
+                renewal = addRenewalCombo.SelectedValue.ToString();
+                flag = false;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Please select value for renewal");
+            }
             startDate = addStartDateBox.Text;
             endDate = addEndDateBox.Text;
             depositDate = addDepositDateBox.Text;
             cleaningDepositDate = addCleaningDateBox.Text;
             keyDepositDate = addKeyDateBox.Text;
             rentDueDate = addrentDateBox.Text;
-            bool flag = true, tenantExists = false;
+            
             Renter renter;
             if (dbloc == "")
             {
@@ -219,8 +229,9 @@ namespace RentalApp
                         command1.Parameters.Add(new SQLiteParameter("@param15", renter.depositDate));
                         command1.Parameters.Add(new SQLiteParameter("@param16", renter.rentDueDate));
                         command1.ExecuteNonQuery();
+                        
                     }
-
+                    
                 }
             }
 

@@ -160,6 +160,8 @@ namespace RentalApp
                 id = rowID.ID;
             }
             MessageBox.Show(id.ToString());
+            RenterDetailedView renterDetailedView = new RenterDetailedView(this.addressID,id);
+            renterDetailedView.ShowDialog();
             //}
             loadItems();
         }
